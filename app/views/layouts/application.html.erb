@@ -3,12 +3,30 @@
 <head>
   <title>RescueMission</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag("vendor/assets/stylesheets/styles.css") %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<div id = "header">
+  <%= link_to "Questions", questions_path %>
+<div class = "link">
+  <%= link_to "Ask", new_question_path %>
+</div>
+</div>
+
+
+
+<% if flash.any? %>
+<div id = "flash"><%= flash[:notice] %></div>
+<% end %>
+
+<div id = "body">
+
 <%= yield %>
+
+</div>
 
 </body>
 </html>

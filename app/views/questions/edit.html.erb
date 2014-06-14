@@ -1,0 +1,16 @@
+<%= form_for @question do |f| %>
+  <%= f.label :title %>:
+  <%= f.text_field :title, size: 85 %>
+
+  <span id = "delete"><%= link_to "Delete", question_path(@question), method: :delete %></span>
+  <br>
+
+
+
+  <%= f.label :description %>:
+  <%= f.text_area :description, :rows => 10, :cols => 80  %><br>
+
+  <%= f.submit %>
+<% end %>
+
+

@@ -1,0 +1,34 @@
+<br>
+<div class = "title">
+  <%= @question.title %>
+
+  <div id = "edit_options">
+    <ul>
+    <li><%= link_to "Update", edit_question_path %></li>
+    <li><%= link_to "Delete", question_path(@question), method: :delete %></li>
+    </ul>
+
+  </div>
+
+</div>
+
+<div class = "description"><%= @question.description %></div>
+
+
+<div class = "title" style = "background:#FF6F00">Answers</div>
+
+<ul id = "answers">
+<% @answers.each do |a| %>
+<li><%= a.description %></li>
+<% end %>
+</ul>
+
+<div id = "submit_answer">
+  <%= form_for [@question,@new_answer] do |f| %>
+
+    <%= f.label "Add your answer" %>:
+    <%= f.text_area :description,:rows => 10, :cols => 85 %><br>
+
+    <%= f.submit %>
+  <% end %>
+</div>
