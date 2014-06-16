@@ -41,5 +41,7 @@ group :test, :development do
   gem 'capybara'
   gem 'pry'
   gem 'rspec'
+  gem 'omniauth-github'
+  gem 'dotenv-rails'
 end
 

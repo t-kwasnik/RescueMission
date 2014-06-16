@@ -11,23 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613183522) do
+ActiveRecord::Schema.define(version: 20140616172603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: true do |t|
-    t.integer  "question_id", null: false
-    t.text     "description", null: false
+    t.integer  "uid",                         null: false
+    t.integer  "question_id",                 null: false
+    t.text     "description",                 null: false
+    t.boolean  "is_favorite", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "questions", force: true do |t|
+    t.integer  "uid",         null: false
     t.string   "title",       null: false
     t.text     "description", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "users", force: true do |t|
+    t.string   "provider",   null: false
+    t.string   "uid",        null: false
+    t.string   "username",   null: false
+    t.string   "email",      null: false
+    t.string   "avatar_url", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
 end

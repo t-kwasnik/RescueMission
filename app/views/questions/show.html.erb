@@ -2,6 +2,8 @@
 <div class = "title">
   <%= @question.title %>
 
+
+  <% if signed_in? && @creator == current_user.id %>
   <div id = "edit_options">
     <ul>
     <li><%= link_to "Update", edit_question_path %></li>
@@ -9,6 +11,7 @@
     </ul>
 
   </div>
+  <% end %>
 
 </div>
 
@@ -19,7 +22,13 @@
 
 <ul id = "answers">
 <% @answers.each do |a| %>
-<li><%= a.description %></li>
+  <li>
+    <b><%= "[Favorite]" if a.is_favorite == true %></b>
+    <%= a.description %>
+    <% if signed_in? && @creator == current_user.id && a.is_favorite != true %>
+      <%= link_to "Make Favorite", question_answer_path(@question, a),method: :patch %>
+    <% end %>
+  </li>
 <% end %>
 </ul>
 

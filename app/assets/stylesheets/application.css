@@ -44,6 +44,22 @@ label {
   font-size: 16pt;
 }
 
+#ask {
+  text-align: center;
+  padding: 1em;
+}
+#ask > a {
+  font-size: 24pt;
+  color: #FF7600;
+  text-shadow:  1px 1px 1px #000;
+}
+
+#ask > a:hover {
+  font-size: 26pt;
+  color: #FF7600;
+  text-shadow:  1px 1px 1px white;
+}
+
 input {
   padding: .5em;
   border-radius: 5px;

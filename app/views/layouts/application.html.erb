@@ -12,15 +12,22 @@
 <div id = "header">
   <%= link_to "Questions", questions_path %>
 <div class = "link">
-  <%= link_to "Ask", new_question_path %>
+  <% if signed_in? %>
+  <%= link_to "Sign Out", session_path(current_user), method: :delete %>
+  <% else %>
+  <%= link_to "Sign In", "/auth/github" %>
+  <% end %>
 </div>
 </div>
-
-
 
 <% if flash.any? %>
 <div id = "flash"><%= flash[:notice] %></div>
 <% end %>
+
+<div id = "ask">
+  <%= link_to "Ask", new_question_path %>
+</div>
+
 
 <div id = "body">
 

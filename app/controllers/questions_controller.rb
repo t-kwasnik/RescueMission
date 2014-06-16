@@ -10,7 +10,9 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params["id"])
     @new_answer = Answer.new
-    @answers = Answer.where(question_id: params["id"]).order("updated_at desc")
+    @answers = Answer.where(question_id: params["id"]).order("is_favorite desc, updated_at desc")
+    @creator = @question.uid
+
   end
 
   def edit
@@ -18,7 +20,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
+
     @question = Question.find(params["id"])
+
+    if @question.uid != current_user.id
+      redirect_to '/questions'
+    end
 
     if question_params[:title].length < MIN_TITLE_LENGTH
       flash.now[:notice] = "Please supply a longer title"
@@ -37,7 +44,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
+
     @question = Question.new(question_params)
+    @question.uid = session[:user_id]
 
     if question_params[:title].length < MIN_TITLE_LENGTH
       flash.now[:notice] = "Please supply a longer title"
@@ -75,6 +84,7 @@ class QuestionsController < ApplicationController
     # this method will return a hash like this:
     # { title: "whatever title", author: "some person", body: "blah blah blah" }
     params.require(:question).permit(:title, :description)
+
   end
 
 
